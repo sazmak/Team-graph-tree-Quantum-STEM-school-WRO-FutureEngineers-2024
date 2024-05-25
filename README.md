@@ -1,2 +1,11 @@
 # Team-graph-tree-Quantum-STEM-school-WRO-FutureEngineers-2024
-Hi, our names are Amiraly and Sanzhar. We're contesting for the wro-future engineers 2024. Here you may get familliar with our porject 
+This repository provides information and knowledge regarding the ongoing progress, evolution, and development of our self-driving robot vehicle, which was created and coded by us as a participant in the Future Engineers division of the World Robot Olympiad (WRO).
+
+
+# Content 
+1 Robots photos
+
+
+
+
+
