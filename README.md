@@ -5,7 +5,7 @@ This repository documents our extensive journey in participating in the World Ro
 
 # Content 
 
-* `Robots photos` Contais photos which we took while whole procces
+* `Car photos` Contais photos which we took while whole procces
 * `Our photos` Contains photos of two the most beautiful mans in the world
 * `videos` Contains video file of driving tests
 * `schemes` Contains circuit and wokwi models of the robot
