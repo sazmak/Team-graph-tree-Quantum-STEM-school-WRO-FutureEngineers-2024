@@ -10,7 +10,6 @@ This repository documents our extensive journey in participating in the World Ro
 * `videos` Contains video file of driving tests
 * `schemes` Contains circuit and wokwi models of the robot
 * `src` Contains code of control software for all components which were programmed to participate in the competition
-* `models` Contains files for models used by 3D printers
 * `other` Contains files which can be used to understand how to prepare the vehicle for the competition.
 
 # Introduction
