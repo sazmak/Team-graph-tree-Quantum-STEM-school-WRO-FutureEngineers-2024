@@ -10,7 +10,6 @@ This repository documents our extensive journey in participating in the World Ro
 * `videos` Contains video file of driving tests
 * `schemes` Contains circuit and wokwi models of the robot
 * `src` Contains code of control software for all components which were programmed to participate in the competition
-* 
 # Introduction
 
 Welcome to the exciting world of robotics! We proudly present our self-driving robot, a fascinating project built on the Arduino platform. This robot integrates essential components to autonomously navigate its environment, demonstrating basic principles of self-driving technology. Here’s a closer look at what powers our robot:
@@ -30,6 +29,127 @@ This project is a fantastic starting point for anyone interested in robotics, pr
 
 Project Code
 Here is the complete code for our self-driving robot, incorporating the features and functions described:
+
+  #include "Adafruit_VL53L0X.h"
+  #include <Servo.h>
+
+  // Address for each sensor
+  #define LOX1_ADDRESS 0x30
+  #define LOX2_ADDRESS 0x31
+
+  // Pins for sensor shutdown
+  #define SHT_LOX1 5
+  #define SHT_LOX2 6
+
+  // Motor connections
+  #define motorPin 7
+bool flag, flag1;
+  // Servo connections
+  #define servoPin 3
+
+  // Define maximum and minimum servo angles
+  #define MAX_ANGLE 125
+  #define MIN_ANGLE 55
+
+  // Define motor speed
+  int MOTOR_SPEED = 150; // Adjust speed as needed
+  int timer, timer1;
+  Adafruit_VL53L0X lox1 = Adafruit_VL53L0X();
+  Adafruit_VL53L0X lox2 = Adafruit_VL53L0X();
+  VL53L0X_RangingMeasurementData_t measure1, measure2;
+  Servo servoMotor;
+
+  // Proportional constant
+  const float Kp = 0.2;  // This value might need tuning
+
+  // Function prototypes
+  void setID();
+  void readDualSensors();
+  void follow();
+
+  void setup() {
+    Serial.begin(115200);
+
+    pinMode(SHT_LOX1, OUTPUT);
+    pinMode(SHT_LOX2, OUTPUT);
+
+    digitalWrite(SHT_LOX1, LOW);
+    digitalWrite(SHT_LOX2, LOW);
+
+    setID();
+
+    pinMode(motorPin, OUTPUT);
+    servoMotor.attach(servoPin);
+  }
+
+  void loop() {
+    follow(); // Call the follow function in a loop
+  }
+
+  void setID() {
+    digitalWrite(SHT_LOX1, HIGH);
+    digitalWrite(SHT_LOX2, LOW);
+
+    if (!lox1.begin(LOX1_ADDRESS)) {
+      Serial.println(F("Failed to initialize first VL53L0X sensor"));
+      while (1);
+    }
+
+    digitalWrite(SHT_LOX2, HIGH);
+
+    if (!lox2.begin(LOX2_ADDRESS)) {
+      Serial.println(F("Failed to initialize second VL53L0X sensor"));
+      while (1);
+    }
+  }
+
+  void readDualSensors() {
+    lox1.rangingTest(&measure1, false);
+    lox2.rangingTest(&measure2, false);
+  }
+
+  void follow() {
+    int timer = millis();
+
+    readDualSensors(); // Update sensor readings
+
+    int distLeft = measure2.RangeMilliMeter;
+    int distRight = measure1.RangeMilliMeter;
+    
+    // Calculate error
+    int error = distRight - distLeft;
+    
+    // Calculate the angle to steer towards the center
+    int angle = 90 + Kp * error;
+  MOTOR_SPEED = 200;
+
+    // Ensure the angle is within defined limits
+    angle = constrain(angle, MIN_ANGLE, MAX_ANGLE);
+    
+    // Adjust servo angle
+    servoMotor.write(angle);
+    
+    // Drive motor forward
+    analogWrite(motorPin, MOTOR_SPEED);
+  int count = 0;
+    
+  if (!flag1) {
+    int timer1 = millis();
+    flag1 = true;
+  }
+  if (distRight > 2000 || distLeft > 2000 && flag == false){
+    count++;
+    flag = true;
+  } else if (timer - timer1 >= 1500) {
+    flag = false; 
+    flag1 = false;
+  }
+  if (count >= 11) {
+    MOTOR_SPEED = 0;
+  }
+
+  }
+
 
 # Team meaning 
 
