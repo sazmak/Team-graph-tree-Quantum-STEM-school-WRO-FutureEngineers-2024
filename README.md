@@ -10,10 +10,26 @@ This repository documents our extensive journey in participating in the World Ro
 * `videos` Contains video file of driving tests
 * `schemes` Contains circuit and wokwi models of the robot
 * `src` Contains code of control software for all components which were programmed to participate in the competition
-* `other` Contains files which can be used to understand how to prepare the vehicle for the competition.
-
+* 
 # Introduction
 
+Welcome to the exciting world of robotics! We proudly present our self-driving robot, a fascinating project built on the Arduino platform. This robot integrates essential components to autonomously navigate its environment, demonstrating basic principles of self-driving technology. Here’s a closer look at what powers our robot:
+
+Key Components
+Arduino Microcontroller: The brain of our robot, responsible for processing inputs from sensors and controlling the motor driver.
+Motor Driver: Enables precise control of the motors, allowing the robot to move forward, backward, and make turns.
+Battery Pack: Supplies the necessary power to the entire system, ensuring the robot can operate autonomously.
+Distance Sensors: Two sensors (VL53L0X) placed on either side of the robot to measure distances and help it navigate by avoiding obstacles and staying on course.
+Servo Motor: Provides steering control to change the direction of the robot.
+How It Works
+Sensor Input: The distance sensors continuously measure the distance to objects on either side of the robot.
+Processing: The Arduino processes these distance measurements to determine the robot’s position relative to its surroundings.
+Control: Based on the sensor inputs, the Arduino sends signals to the motor driver and servo motor, adjusting the speed and direction of the motors to keep the robot moving forward and centered.
+Navigation: By combining forward motion and controlled turns, the robot can navigate a predetermined path, such as moving in a square.
+This project is a fantastic starting point for anyone interested in robotics, programming, and electronics. It offers a hands-on experience in building and programming a self-driving system, fostering a deeper understanding of the technologies behind autonomous vehicles.
+
+Project Code
+Here is the complete code for our self-driving robot, incorporating the features and functions described:
 
 # Team meaning 
 
